@@ -1,0 +1,19 @@
+Guia de port para o Nintendo Switch
+Copyright (c) 2026 Gustavo Henrique Rocha
+
+O texto deste guia (tudo em docs/ e o README.md) está licenciado sob a
+Creative Commons Atribuição 4.0 Internacional (CC BY 4.0).
+
+Você pode copiar, redistribuir, adaptar e usar o material para qualquer fim,
+inclusive comercial, desde que dê o crédito apropriado (autor, título e link
+para o original), indique se fez alterações e não sugira que o autor endossa
+você ou o seu uso.
+
+Resumo da licença:   https://creativecommons.org/licenses/by/4.0/deed.pt-br
+Texto legal completo: https://creativecommons.org/licenses/by/4.0/legalcode.pt
+
+O código do gerador do site (tools/, tests/ e .github/) está sob a licença MIT;
+veja LICENSE-CODE.
+
+Nomes de produtos e de projetos citados pertencem aos seus titulares. Os
+trechos de código do guia são ilustrativos e escritos para este texto.
