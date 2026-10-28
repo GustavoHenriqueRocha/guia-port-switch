@@ -44,7 +44,7 @@ gio remove "mtp://<dispositivo>/microSD card/switch/<jogo>/app.nro"
 gio copy app.nro "mtp://<dispositivo>/microSD card/switch/<jogo>/"
 ```
 
-O MTP **não sobrescreve**: remova antes de copiar. É mais estável que o FTP para arquivos grandes.
+O MTP **não sobrescreve**: remova antes de copiar.
 
 ## Rótulo por build
 

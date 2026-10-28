@@ -8,10 +8,10 @@ Tudo aqui saiu de um port real e foi medido no console. Cada técnica vem com o 
 
 O caso de estudo é o **TriAevum**, uma recompilação estática (AOT) de *The Legend of Zelda: Ocarina of Time 3D*: o código ARM11 do 3DS é traduzido para C++ e compilado como programa nativo, sem interpretador. O recompilador, o runtime e o renderizador PICA → OpenGL são do projeto original, de **coccofresco** ([github.com/coccofresco/TriAevum](https://github.com/coccofresco/TriAevum)).
 
-O trabalho descrito neste guia é o **port para o Switch** feito por Gustavo Henrique Rocha num fork ([TriAevum-Switch](https://github.com/GustavoHenriqueRocha/TriAevum-Switch)):
+O trabalho descrito neste guia é o **port para o Switch** feito por Gustavo Henrique Rocha num fork ([TriAevum-Switch](https://github.com/GustavoHenriqueRocha/TriAevum-Switch)). A ideia central foi juntar num só lugar técnicas que já existiam espalhadas em outros ports de Switch e medir, uma a uma, o que realmente rodava bem neste jogo. Daí saíram:
 
 - backend Switch (libnx, SDL2, Mesa/nouveau) e o backend **deko3d** alternativo;
-- desempenho de CPU no console (PGO com GCC, layout de threads, ajustes do código gerado);
+- desempenho de CPU no console (PGO com GCC, layout de threads, ajustes do código gerado), a partir de técnicas usadas em outros ports;
 - frame time: pacing, interpolação a 60 Hz, resolução dinâmica, medição por pico;
 - áudio no Switch (audren, reamostrador, thread própria);
 - ferramentas de medição e a suíte de testes de regressão.

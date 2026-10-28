@@ -18,7 +18,7 @@ backend deko3d no lugar do Mesa, tour de 44 áreas
 
 ## De onde vem
 
-O caso de estudo é o port para Switch do **TriAevum**, uma recompilação estática de *Ocarina of Time 3D*. O recompilador, o runtime e o renderizador são do projeto original, de [coccofresco](https://github.com/coccofresco/TriAevum). O port para o Switch, no fork [TriAevum-Switch](https://github.com/GustavoHenriqueRocha/TriAevum-Switch), é meu: backend Switch e deko3d, desempenho, frame time, áudio no console e a suíte de testes.
+O caso de estudo é o port para Switch do **TriAevum**, uma recompilação estática de *Ocarina of Time 3D*. O recompilador, o runtime e o renderizador são do projeto original, de [coccofresco](https://github.com/coccofresco/TriAevum). O port para o Switch, no fork [TriAevum-Switch](https://github.com/GustavoHenriqueRocha/TriAevum-Switch), é meu: a ideia de reunir técnicas de vários ports de Switch e testar o que funcionava neste jogo, o backend Switch e deko3d, o frame time, o áudio no console e a suíte de testes.
 
 O guia não trata de obter jogos, ROMs, chaves ou firmware, nem de contornar proteções, e não contém assets de jogo. Os trechos de código são curtos e ilustrativos.
 
