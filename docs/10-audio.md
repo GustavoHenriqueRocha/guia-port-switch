@@ -29,7 +29,7 @@ Lição do stretch: a primeira versão usava um crédito com sinal e editava o �
 
 ## A prioridade `TIME_CRITICAL` do SDL
 
-Relatado em [devkitPro/SDL#136](https://github.com/devkitPro/SDL/issues/136).
+Relatado ao devkitPro (SDL) em outubro de 2026; a issue foi removida pelos mantenedores sem resposta, e a correção fica registrada aqui.
 
 O SDL cria a thread de áudio com `SDL_THREAD_PRIORITY_TIME_CRITICAL`. No port do devkitPro, essa prioridade é traduzida para **0x3B** no Horizon, que é a prioridade de revezamento, abaixo de qualquer thread de jogo (0x2C) ou de render. Pelas [regras do agendador](03-threads-no-horizon.md#as-regras), uma thread ocupada de prioridade mais alta no mesmo núcleo impede a de áudio de rodar. Resultado: o áudio picotava exatamente nos momentos de carga.
 
@@ -49,7 +49,7 @@ extern "C" int __wrap_SDL_SetThreadPriority(SDL_ThreadPriority p) {
 
 ## `thrd_success` vale 4 no newlib
 
-Relatado em [devkitPro/pacman-packages#440](https://github.com/devkitPro/pacman-packages/issues/440).
+Relatado ao devkitPro (pacman-packages) em outubro de 2026, com o mesmo destino da issue do SDL.
 
 O newlib define `thrd_success` como 4. Código que testa `if (thrd_create(...))` ou `== 0` trata uma thread criada com sucesso como falha. No Mesa, isso fazia o glthread não ligar e liberar estruturas usadas pela thread que já rodava. A análise completa está no [capítulo 5](05-patches-do-mesa.md#0007-thrd_success-vale-4-no-newlib).
 

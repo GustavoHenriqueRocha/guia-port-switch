@@ -68,7 +68,7 @@ Junto com o glthread, o port também tirou o `glGetError` por textura (cada um f
 
 ## 0007: `thrd_success` vale 4 no newlib
 
-Este é o bug que motivou a issue [devkitPro/pacman-packages#440](https://github.com/devkitPro/pacman-packages/issues/440).
+Este bug foi relatado ao devkitPro (pacman-packages) em outubro de 2026; a issue foi removida pelos mantenedores sem resposta, e a correção fica registrada aqui.
 
 O C11 não fixa os valores de `thrd_success` e companhia. O newlib define `thrd_success` como **4**. O `u_thread_create` do Mesa testava `if (ret)`, ou seja, tratava qualquer valor diferente de zero como falha:
 

@@ -45,7 +45,7 @@ Resultado: com a render thread no seu próprio núcleo, cerca de 10 ms de GL por
 
 ## O caso do SDL: `TIME_CRITICAL` abaixo do jogo
 
-O SDL2 do devkitPro traduz `SDL_THREAD_PRIORITY_TIME_CRITICAL` para **0x3B**, a prioridade de revezamento, abaixo do jogo e da render thread. A thread de áudio do SDL, que deveria ser a mais urgente, ficava abaixo do jogo e de todo o resto, e o áudio picotava sempre que o núcleo estava ocupado. Detalhes e a issue reportada estão no [capítulo de áudio](10-audio.md#a-prioridade-time_critical-do-sdl).
+O SDL2 do devkitPro traduz `SDL_THREAD_PRIORITY_TIME_CRITICAL` para **0x3B**, a prioridade de revezamento, abaixo do jogo e da render thread. A thread de áudio do SDL, que deveria ser a mais urgente, ficava abaixo do jogo e de todo o resto, e o áudio picotava sempre que o núcleo estava ocupado. Detalhes e a correção estão no [capítulo de áudio](10-audio.md#a-prioridade-time_critical-do-sdl).
 
 ## Sem espera ativa
 

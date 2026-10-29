@@ -40,10 +40,12 @@ O guia não trata de obter jogos, ROMs, chaves ou firmware, nem de contornar pro
 | 12 | [Testes de regressão](docs/12-testes-de-regressao.md) | lógica pura, simulador de cadência, exatidão bit a bit, guardas |
 | 13 | [Lições](docs/13-licoes.md) | o resumo para o próximo port |
 
-## Bugs reportados ao devkitPro
+## Bugs encontrados no devkitPro
 
-- [devkitPro/SDL#136](https://github.com/devkitPro/SDL/issues/136): `SDL_THREAD_PRIORITY_TIME_CRITICAL` vira 0x3B no Horizon, abaixo do jogo, e o áudio picota sob carga.
-- [devkitPro/pacman-packages#440](https://github.com/devkitPro/pacman-packages/issues/440): `thrd_success` vale 4 no newlib e o Mesa toma uma thread criada por falha.
+Os dois foram relatados ao devkitPro em outubro de 2026 (SDL e pacman-packages). As issues foram removidas pelos mantenedores sem resposta, então o diagnóstico e a correção ficam documentados aqui:
+
+- **SDL:** `SDL_THREAD_PRIORITY_TIME_CRITICAL` vira 0x3B no Horizon, abaixo do jogo, e o áudio picota sob carga. Ver [Áudio](docs/10-audio.md#a-prioridade-time_critical-do-sdl).
+- **Mesa / newlib:** `thrd_success` vale 4 no newlib e o Mesa toma uma thread criada por falha. Ver [Patches do Mesa](docs/05-patches-do-mesa.md#0007-thrd_success-vale-4-no-newlib).
 
 ## Site
 
