@@ -67,6 +67,23 @@ Uma área só não representa o jogo. O port tem um canal de laboratório: um ro
 4. Uma variável por vez, por arquivo de configuração.
 5. Para lógica, olhar o tempo do jogo e a CPU do núcleo 0; para GPU, as etapas de GPU; para áudio, a taxa do dispositivo e as ocultações.
 
+## Quando a medida muda de significado
+
+Depois de mesclar uma série grande de contribuições, o tempo do jogo por quadro subiu 1–2 ms em todas as áreas do tour. Parte da subida era só medida: uma mudança na captura dos desenhos passou a contar dentro do jogo um trabalho que antes era espera. Numa área pesada, o build antigo dava 7,5 ms de jogo + 7,9 ms de espera e o novo 12,1 + 3,1: a soma praticamente igual.
+
+- Entre builds que mexeram na instrumentação, compare **a soma** (trabalho + espera) ou o FPS que se vê, não um campo isolado.
+- **Contadores que zeram no meio da janela** inventam diferenças. A troca de cena recriava o estado de um subsistema e zerava os contadores dele; "33 mil tentativas contra 4,3 mil" era isso. Zere só na fronteira da janela, ou grave a troca junto.
+
+## Recurso caro pesa onde não desenha nada
+
+Um efeito de grama derrubou a área mais pesada de 60 para 53,8 FPS de média (mínimo 44,6), numa área **sem grama**. A culpa não estava no desenho do efeito, mas no teste que decide se cada draw opaco pode ser chão de grama: ~53 µs por draw nessa área contra 3–8 µs nas outras, 3,39 ms por quadro na pior janela. A render thread dobrou (6,5 → 13,9 ms por passo) e o jogo passou a esperar por ela.
+
+A correção foi um filtro barato antes do teste caro: uma textura já resolvida como "não é chão" sai antes de montar a chave do cache de decisões. O teste caiu para 0,39 ms por quadro, a render thread para 7,3 ms e a área para 59,4 FPS de média (mínimo 57,7). Lições:
+
+- Todo recurso que testa **cada draw** custa mesmo onde não aparece. Meça o custo nas áreas onde ele não desenha.
+- Um sintoma pode parecer causa: a latência das chamadas ao serviço de clock subia junto (22 µs → 23,6 ms) e voltava com a correção. Era CPU ocupada, não o serviço.
+- Rodada única com diferença muito maior que o ruído serve para decidir. Uma segunda rodada é o que confirma.
+
 ## Travamento sem crash report
 
 Imagem parada, nada em `atmosphere/crash_reports`: não há pilha. A receita que funcionou:

@@ -51,3 +51,5 @@ O resumo do guia, para reler antes do próximo port. Cada item aponta para o cap
 30. **Os logs antigos já dizem muito.** Antes de pedir uma rodada nova, passe o script nos logs que existem.
 31. **Todo bug ganha teste de host; toda decisão medida ganha guarda.** ([12](12-testes-de-regressao.md))
 32. **Mudança que roda o tempo todo precisa de teste de longa duração** antes de ir ao console. ([9](09-memoria.md#teste-de-longa-duração))
+33. **Build que mexeu na instrumentação se compara pela soma** (trabalho + espera) ou pelo FPS visto, nunca por um campo isolado. ([8](08-medicao-de-frame-time.md#quando-a-medida-muda-de-significado))
+34. **Recurso que testa cada draw custa onde não desenha.** Meça nas áreas sem ele e ponha um filtro barato antes do teste caro. ([8](08-medicao-de-frame-time.md#recurso-caro-pesa-onde-não-desenha-nada))
