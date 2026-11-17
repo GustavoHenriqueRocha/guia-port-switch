@@ -35,6 +35,16 @@ Resultado no mesmo roteiro de 44 áreas, mesmos clocks:
 
 A GPU ficou igual; o ganho foi CPU da render thread (−40%), que é o que sobra para absorver picos.
 
+### Quando vale trocar a API
+
+O deko3d corta o custo de **submeter** trabalho, não o de **executar**: os mesmos shaders rodam na mesma GPU. Antes de reescrever um renderizador, separe as duas medidas:
+
+- **Render thread ocupada perto do orçamento, GPU com folga**: é o caso deste port (3–4 ms por quadro só submetendo draws pelo GL). A troca rende.
+- **GPU ocupada perto do orçamento**: a troca não muda o tempo de GPU. O caminho é cortar trabalho de GPU: achar os passes caros com timestamps por etapa ([capítulo 8](08-medicao-de-frame-time.md#tempo-de-gpu-sem-travar)), baixar a resolução só deles, resolução dinâmica.
+- **Já em Vulkan**: o ganho visto aqui veio de sair do GL, que gasta CPU por draw. Um backend Vulkan (NVK, por exemplo) já é explícito; o que sobra para ganhar não foi medido neste port. E o `uam` compila GLSL: um corpus em SPIR-V precisa de uma etapa de tradução antes.
+
+Exemplo: um port de Dark Souls II para o Switch ([DS2_switch](https://github.com/XDASCATX/DS2_switch), v131) declara a GPU em 25–32 ms por quadro e a thread de comandos em ~20 ms, sobre Vulkan. Para 30 FPS (33,3 ms) a thread de comandos já cabe; o limite é a GPU, e trocar a API não o resolve.
+
 ## Receita: trocar o GL por deko3d sem reescrever os shaders
 
 O renderizador já gerava GLSL. A meta era usar **os mesmos textos** no deko3d.
