@@ -33,24 +33,25 @@ O resumo do guia, para reler antes do próximo port. Cada item aponta para o cap
 18. **Tirar uma medida inflada pode expor que o orçamento nunca foi o que parecia.** Calibre a margem no console. ([7](07-orcamento-e-pacing.md#margem-calibrada))
 19. **Dois relógios "de 60 Hz" nunca são o mesmo relógio.** Quem apresenta segue quem exibe. ([7](07-orcamento-e-pacing.md#o-pacer-e-o-relógio-do-display))
 20. **Dois controladores sobre o mesmo recurso decidem com a mesma medida.** ([7](07-orcamento-e-pacing.md#resolução-dinâmica-drs))
-21. **Todo "aplica em X" ganha contador de X.** A DRS passou um teste inteiro "mudando" uma escala que nunca era aplicada; o contador de aplicação mostrou na primeira medida.
-22. **Otimização "tudo ou nada" precisa de contador de motivo desde a primeira versão.** Senão, quando ela não age, só resta adivinhar.
-23. **Se um defeito visual some a 30 FPS, comece pela interpolação.** ([7](07-orcamento-e-pacing.md#interpolação-e-culling))
+21. **Filtro por valor exato quebra no próximo jogo.** Um critério "largura == 480" deixou dois recursos desligados em silêncio no segundo port; troque a constante por uma regra única e teste o caso vizinho. ([7](07-orcamento-e-pacing.md#resolução-dinâmica-drs))
+22. **Todo "aplica em X" ganha contador de X.** A DRS passou um teste inteiro "mudando" uma escala que nunca era aplicada; o contador de aplicação mostrou na primeira medida.
+23. **Otimização "tudo ou nada" precisa de contador de motivo desde a primeira versão.** Senão, quando ela não age, só resta adivinhar.
+24. **Se um defeito visual some a 30 FPS, comece pela interpolação.** ([7](07-orcamento-e-pacing.md#interpolação-e-culling))
 
 ## Memória
 
-24. **Nada de alocação grande por quadro**; o heap do newlib tem lock global e fragmenta. ([9](09-memoria.md#o-heap-do-newlib))
-25. **Cache de GPU sem orçamento é crash em minutos.** ([9](09-memoria.md#memória-de-gpu-limitada))
-26. **Crash dentro do driver não acusa o chamador.** Struct com ponteiro ímpar é memória sobrescrita; prove a sua parte com ASan. ([9](09-memoria.md#heap-corrompido-o-crash-não-acusa-o-culpado))
-27. **Antes de mudar quem guarda um struct grande, veja quais campos alguém lê.** ([9](09-memoria.md#structs-grandes-custam-banda))
-28. **Mais folga entre threads não é só um número**: estado compartilhado pode supor o contrário. ([7](07-orcamento-e-pacing.md#quadros-em-voo))
+25. **Nada de alocação grande por quadro**; o heap do newlib tem lock global e fragmenta. ([9](09-memoria.md#o-heap-do-newlib))
+26. **Cache de GPU sem orçamento é crash em minutos.** ([9](09-memoria.md#memória-de-gpu-limitada))
+27. **Crash dentro do driver não acusa o chamador.** Struct com ponteiro ímpar é memória sobrescrita; prove a sua parte com ASan. ([9](09-memoria.md#heap-corrompido-o-crash-não-acusa-o-culpado))
+28. **Antes de mudar quem guarda um struct grande, veja quais campos alguém lê.** ([9](09-memoria.md#structs-grandes-custam-banda))
+29. **Mais folga entre threads não é só um número**: estado compartilhado pode supor o contrário. ([7](07-orcamento-e-pacing.md#quadros-em-voo))
 
 ## Processo
 
-29. **Uma variável por vez, mesmo clock, cache quente, várias áreas, duas passadas.** ([8](08-medicao-de-frame-time.md#protocolo-de-ab))
-30. **Uma medição cara sai do caminho quente assim que responde a pergunta.** ([8](08-medicao-de-frame-time.md#medir-sem-atrapalhar))
-31. **Os logs antigos já dizem muito.** Antes de pedir uma rodada nova, passe o script nos logs que existem.
-32. **Todo bug ganha teste de host; toda decisão medida ganha guarda.** ([12](12-testes-de-regressao.md))
-33. **Mudança que roda o tempo todo precisa de teste de longa duração** antes de ir ao console. ([9](09-memoria.md#teste-de-longa-duração))
-34. **Build que mexeu na instrumentação se compara pela soma** (trabalho + espera) ou pelo FPS visto, nunca por um campo isolado. ([8](08-medicao-de-frame-time.md#quando-a-medida-muda-de-significado))
-35. **Recurso que testa cada draw custa onde não desenha.** Meça nas áreas sem ele e ponha um filtro barato antes do teste caro. ([8](08-medicao-de-frame-time.md#recurso-caro-pesa-onde-não-desenha-nada))
+30. **Uma variável por vez, mesmo clock, cache quente, várias áreas, duas passadas.** ([8](08-medicao-de-frame-time.md#protocolo-de-ab))
+31. **Uma medição cara sai do caminho quente assim que responde a pergunta.** ([8](08-medicao-de-frame-time.md#medir-sem-atrapalhar))
+32. **Os logs antigos já dizem muito.** Antes de pedir uma rodada nova, passe o script nos logs que existem.
+33. **Todo bug ganha teste de host; toda decisão medida ganha guarda.** ([12](12-testes-de-regressao.md))
+34. **Mudança que roda o tempo todo precisa de teste de longa duração** antes de ir ao console. ([9](09-memoria.md#teste-de-longa-duração))
+35. **Build que mexeu na instrumentação se compara pela soma** (trabalho + espera) ou pelo FPS visto, nunca por um campo isolado. ([8](08-medicao-de-frame-time.md#quando-a-medida-muda-de-significado))
+36. **Recurso que testa cada draw custa onde não desenha.** Meça nas áreas sem ele e ponha um filtro barato antes do teste caro. ([8](08-medicao-de-frame-time.md#recurso-caro-pesa-onde-não-desenha-nada))
