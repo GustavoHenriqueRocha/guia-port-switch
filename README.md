@@ -39,6 +39,7 @@ O guia não trata de obter jogos, ROMs, chaves ou firmware, nem de contornar pro
 | 11 | [Deploy](docs/11-deploy.md) | nxlink, FTP, MTP e o que guardar de cada build |
 | 12 | [Testes de regressão](docs/12-testes-de-regressao.md) | lógica pura, simulador de cadência, exatidão bit a bit, guardas |
 | 13 | [Lições](docs/13-licoes.md) | o resumo para o próximo port |
+| 14 | [Ports de referência](docs/14-ports-de-referencia.md) | o que outros ports de Switch fazem, o que reaproveitar e o que não copiar |
 
 ## Bugs encontrados no devkitPro
 
