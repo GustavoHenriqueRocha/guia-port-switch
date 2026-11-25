@@ -8,6 +8,8 @@ Como ler cada técnica:
 - **número da fonte**: o número é do próprio port, não foi refeito aqui;
 - **sem número**: a fonte não traz medida.
 
+Além disso, cada técnica diz se **roda neste port** e se o ganho dela foi **medido isolado**. Uma técnica pode estar em uso sem número próprio, porque entrou junto com outras mudanças.
+
 Ganho de outro jogo não se transfere: serve para escolher o que testar primeiro, não para prometer resultado. A última passada no catálogo foi em 25/11/2026.
 
 ## Recompilação de jogos de 3DS (o mesmo runtime deste guia)
@@ -38,8 +40,8 @@ Ganho de outro jogo não se transfere: serve para escolher o que testar primeiro
 
 [JohnUzoka/TriAevum-Switch](https://github.com/JohnUzoka/TriAevum-Switch). OoT3D no Switch, derivado deste port.
 
-- **Janela fastmem:** reserva plana do espaço do guest. Os acessos inline leem uma tabela de flags por página e vão direto à janela, sem percorrer a tabela de páginas. Estimativa da fonte: 7–10 %, "2–3 ms de 25–30 ms" por passo.
-- **Caminhos rápidos da thread do jogo:** despacho da lista PICA por tabela; snapshots de vértice e de textura com caminho de acerto; captura só do que mudou; LRU em O(1) no cache de geometria. Medido aqui no OoT3D: desligar essas chaves piorou o pico do guest numa área pesada de 14,9 para 19,4 ms.
+- **Janela fastmem:** reserva plana do espaço do guest. Os acessos inline leem uma tabela de flags por página e vão direto à janela, sem percorrer a tabela de páginas. Estimativa da fonte: 7–10 %, "2–3 ms de 25–30 ms" por passo. Roda neste port; ganho isolado não medido.
+- **Caminhos rápidos da thread do jogo:** despacho da lista PICA por tabela; snapshots de vértice e de textura com caminho de acerto; captura só do que mudou; LRU em O(1) no cache de geometria. Roda neste port, medido aqui: desligar essas chaves piorou o pico do guest numa área pesada de 14,9 para 19,4 ms.
 - **Read-back com fence:** a cópia de textura que o jogo lê de volta vira fence + leitura adiada, no lugar da espera síncrona. Número da fonte, só nas cenas que leem de volta: 38,5 ms por cópia e 15 fps.
 - **Não copiar:** o modo de desempenho por clkrst. Mexer no clock dentro do app briga com o sys-clk.
 
@@ -56,7 +58,7 @@ Ganho de outro jogo não se transfere: serve para escolher o que testar primeiro
 
 [StevensND/nfsmw-nx](https://github.com/StevensND/nfsmw-nx). Need for Speed: Most Wanted (decomp) no Switch.
 
-- **Flags de PGO:** `-fprofile-correction`, que aceita contadores inconsistentes de várias threads, e `-fno-profile-values`, que evita o perfil de chamada indireta. Esse perfil lê o `tpidr_el0`, que no Horizon é 0. Sem número.
+- **Flags de PGO:** `-fprofile-correction`, que aceita contadores inconsistentes de várias threads, e `-fno-profile-values`, que evita o perfil de chamada indireta. Esse perfil lê o `tpidr_el0`, que no Horizon é 0. Sem número; ainda não testado neste port.
 - **LTO do GCC + ordem de funções** (`--section-ordering-file`): favorece o I-cache do A57. O link com LTO de uma base grande pede `-flto=2` mesmo com 16 GB.
 - **Não copiar:** `nwindowSetSwapInterval(0)` e afinidade com máscara exclusiva, que a própria fonte mediu pior.
 
@@ -65,6 +67,7 @@ Ganho de outro jogo não se transfere: serve para escolher o que testar primeiro
 [Alexgg1014/The-Legend-of-Zelda-Twilight-Princess-Alek-s-Ultimate-NX-Edition](https://github.com/Alexgg1014/The-Legend-of-Zelda-Twilight-Princess-Alek-s-Ultimate-NX-Edition) (CC0). Port de Switch do Dusklight (decomp do Twilight Princess), com deko3d via Aurora e shaders DKSH offline. O [HayatoG/dusklight](https://github.com/HayatoG/dusklight) é creditado só pela camada NVK original.
 
 - **malloc direto:** o newlib do devkitPro manda todo malloc acima de 31 B para `memalign(32)`, com até 2 frees extras sob o lock global. A técnica embrulha `malloc` e chama `_malloc_r` direto. Número da fonte só no conjunto de mudanças: +2 a +9 fps.
+- **Ainda não testado neste port:** as quatro técnicas abaixo.
 - **Swap interval 2 em 30 fps puro:** cadência de 2 vblanks constante, no lugar de pares 1v/3v.
 - **Wake "quieto":** só sinalizar se o outro lado anunciou que vai dormir, porque no libnx todo notify vira `svcSignalProcessWideKey`. Sem número.
 - **Amostrador de PC de ~1 ms** (`svcSetThreadActivity` + `svcGetThreadContext3`): mostrou que a thread principal deles passava ≈ 50 % do tempo esperando. Confira a espera antes de otimizar a CPU.
