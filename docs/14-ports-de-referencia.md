@@ -66,8 +66,8 @@ Ganho de outro jogo não se transfere: serve para escolher o que testar primeiro
 
 [Alexgg1014/The-Legend-of-Zelda-Twilight-Princess-Alek-s-Ultimate-NX-Edition](https://github.com/Alexgg1014/The-Legend-of-Zelda-Twilight-Princess-Alek-s-Ultimate-NX-Edition) (CC0). Port de Switch do Dusklight (decomp do Twilight Princess), com deko3d via Aurora e shaders DKSH offline. O [HayatoG/dusklight](https://github.com/HayatoG/dusklight) é creditado só pela camada NVK original.
 
+- **Nada deste port foi testado aqui ainda.**
 - **malloc direto:** o newlib do devkitPro manda todo malloc acima de 31 B para `memalign(32)`, com até 2 frees extras sob o lock global. A técnica embrulha `malloc` e chama `_malloc_r` direto. Número da fonte só no conjunto de mudanças: +2 a +9 fps.
-- **Ainda não testado neste port:** as quatro técnicas abaixo.
 - **Swap interval 2 em 30 fps puro:** cadência de 2 vblanks constante, no lugar de pares 1v/3v.
 - **Wake "quieto":** só sinalizar se o outro lado anunciou que vai dormir, porque no libnx todo notify vira `svcSignalProcessWideKey`. Sem número.
 - **Amostrador de PC de ~1 ms** (`svcSetThreadActivity` + `svcGetThreadContext3`): mostrou que a thread principal deles passava ≈ 50 % do tempo esperando. Confira a espera antes de otimizar a CPU.
