@@ -58,7 +58,7 @@ Ganho de outro jogo não se transfere: serve para escolher o que testar primeiro
 
 [StevensND/nfsmw-nx](https://github.com/StevensND/nfsmw-nx). Need for Speed: Most Wanted (decomp) no Switch.
 
-- **Flags de PGO:** `-fprofile-correction`, que aceita contadores inconsistentes de várias threads, e `-fno-profile-values`, que evita o perfil de chamada indireta. Esse perfil lê o `tpidr_el0`, que no Horizon é 0. Sem número; ainda não testado neste port.
+- **Flags de PGO:** `-fprofile-correction`, que aceita contadores inconsistentes de várias threads, e `-fno-profile-values`, que evita o perfil de chamada indireta. Esse perfil lê o `tpidr_el0`, que no Horizon é 0. Sem número da fonte. Neste port (MM3D, 25/11) entraram num pacote com o VFP nativo e a pilha enxuta que piorou o tempo do jogo em 61 % (29,2 → 22,5 fps); medido no pacote, não isolado, e por isso saíram do build até um teste só delas.
 - **LTO do GCC + ordem de funções** (`--section-ordering-file`): favorece o I-cache do A57. O link com LTO de uma base grande pede `-flto=2` mesmo com 16 GB.
 - **Não copiar:** `nwindowSetSwapInterval(0)` e afinidade com máscara exclusiva, que a própria fonte mediu pior.
 
