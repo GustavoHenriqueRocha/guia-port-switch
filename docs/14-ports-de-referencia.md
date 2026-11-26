@@ -100,7 +100,9 @@ maioria usa o reNut, renderer em nível de Direct3D do masterspike52, no deko3d.
 - **Aproveitável:**
   - **O quarto núcleo pelo forwarder do Sphaira, sem NSP.** A NRO calcula o program id do forwarder a partir do
     caminho e grava o `main.npdm` em `atmosphere/contents/<id>/exefs`. O áudio e as compilações de shader vão para o
-    núcleo 3, como no NetherSX2_nx. Custam ~0,4 núcleo, segundo o renut-nx `docs/four-core-mode.md`.
+    núcleo 3, como no NetherSX2_nx. Custam ~0,4 núcleo, segundo o renut-nx `docs/four-core-mode.md`. O próprio
+    Sphaira cria forwarder de 4 núcleos desde 204fddee (13/08/2026), sem NPDM escrito pelo jogo. Só vale se os
+    núcleos 0–2 estiverem cheios: no MM3D só a thread do jogo lota (núcleo 0), e o 1 e o 2 sobram.
   - **Loops de espera do guest que cedem ou dormem.** Threads de mesma prioridade travam umas às outras no Horizon.
     No USF4, a luta foi de 10–12 fps para 60.
   - **Hash escalonado de textura linear estável.** A render thread caiu de 6,4 para 2,8 ms.
