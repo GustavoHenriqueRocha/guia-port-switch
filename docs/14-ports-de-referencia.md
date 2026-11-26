@@ -89,6 +89,27 @@ Ganho de outro jogo não se transfere: serve para escolher o que testar primeiro
 - **Aproveitável:** o quarto núcleo pelo forwarder, a mesma técnica do SwitchWakerHD.
 - **Não copiar:** `appletSetCpuBoostMode` e o pipeline cache do Vulkan, que não se aplica ao deko3d.
 
+### Ports de Xbox 360 com o reNut no deko3d (lidos em 26/11/2026)
+
+Dezenas de ports de outubro e novembro de 2026 sobre o [ReXGlue SDK](https://github.com/rexglue/rexglue-sdk). A
+maioria usa o reNut, renderer em nível de Direct3D do masterspike52, no deko3d. Os de partida são
+[ChanseyIsTheBest/renut-nx](https://github.com/ChanseyIsTheBest/renut-nx) (bfa19fd9) e
+[ChanseyIsTheBest/sa2-nx](https://github.com/ChanseyIsTheBest/sa2-nx) (56ecc20d). O estudo de caso é
+[Thorhax/Thorhax-deko3d-reference](https://github.com/Thorhax/Thorhax-deko3d-reference) (b7e298f9): USF4 a 60 fps a 720p.
+
+- **Aproveitável:**
+  - **O quarto núcleo pelo forwarder do Sphaira, sem NSP.** A NRO calcula o program id do forwarder a partir do
+    caminho e grava o `main.npdm` em `atmosphere/contents/<id>/exefs`. O áudio e as compilações de shader vão para o
+    núcleo 3, como no NetherSX2_nx. Custam ~0,4 núcleo, segundo o renut-nx `docs/four-core-mode.md`.
+  - **Loops de espera do guest que cedem ou dormem.** Threads de mesma prioridade travam umas às outras no Horizon.
+    No USF4, a luta foi de 10–12 fps para 60.
+  - **Hash escalonado de textura linear estável.** A render thread caiu de 6,4 para 2,8 ms.
+  - **Entrada tardia pela folga do limitador.** O atraso caiu de 34 para 31 ms.
+  - **Instalador no navegador.** Gera os shaders a partir do jogo do jogador.
+- **Não copiar:**
+  - o reNut em si num jogo que não é de Direct3D;
+  - o código GPL-3.0 num projeto de outra licença: leve a ideia, com crédito.
+
 ### mesa-switch (danfromtico)
 
 [danfromtico/mesa-switch](https://github.com/danfromtico/mesa-switch). Mesa com NVK para o Switch. É referência para quem fica no Vulkan; para um port em deko3d não traz técnica de desempenho.
